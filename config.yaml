@@ -1,0 +1,87 @@
+# CodeWise Multi-Language Configuration
+
+# OpenAI Model Configuration
+model: "gpt-4o-mini"  # Options: gpt-3.5-turbo, gpt-4, gpt-4-turbo-preview, gpt-4o-mini
+temperature: 0.2
+max_tokens: 2000
+
+# Review Configuration
+max_diff_size: 5000  # Maximum lines of diff to review
+max_files: 50  # Maximum files to review per PR
+skip_large_prs: true  # Skip PRs that exceed limits
+post_warning_on_skip: true  # Post warning comment when skipping
+enable_cost_tracking: true  # Track and report OpenAI API costs
+
+# File Filters (applies to all languages)
+exclude_patterns:
+  - "vendor/**"
+  - "node_modules/**"
+  - "storage/**"
+  - "dist/**"
+  - "build/**"
+  - "*.min.js"
+  - "*.min.css"
+  - "package-lock.json"
+  - "composer.lock"
+  - "yarn.lock"
+  - "*.map"
+  - "__pycache__/**"
+  - "*.pyc"
+  - ".pytest_cache/**"
+  - "venv/**"
+  - ".venv/**"
+
+# Enhancement Features
+enable_multi_file_context: true  # Retrieve full file content for better context
+enable_confidence_scoring: true  # Calculate and display confidence scores
+enable_learning_resources: true  # Include learning resource links
+enable_similarity_search: false  # Search for similar code patterns (experimental)
+
+# Language-Specific Settings
+languages:
+  php:
+    enabled: true
+    frameworks:
+      - laravel
+    focus_areas:
+      - security  # SQL injection, XSS, CSRF, authorization
+      - performance  # N+1 queries, caching
+      - best_practices  # Laravel conventions, PSR-12
+      - eloquent_optimization
+      - validation
+  
+  javascript:
+    enabled: true
+    frameworks:
+      - react
+      - angular
+      - vue
+      - node
+      - express
+    focus_areas:
+      - security  # XSS, prototype pollution, dependency vulnerabilities
+      - performance  # Bundle size, memory leaks, rendering
+      - best_practices  # Modern ES6+, async/await
+      - accessibility  # a11y compliance
+      - error_handling
+  
+  python:
+    enabled: true
+    frameworks:
+      - django
+      - flask
+      - fastapi
+    focus_areas:
+      - security  # SQL injection, command injection, deserialization
+      - performance  # Query optimization, algorithmic efficiency
+      - best_practices  # PEP 8, Pythonic code
+      - type_hints
+      - error_handling
+
+# Comment Settings
+min_confidence_score: 0.0  # Minimum confidence to post (0.0 = always post)
+severity_labels:
+  critical: "🔴 Critical"
+  important: "🟡 Important"
+  suggestion: "🔵 Suggestion"
+  info: "⚪ Info"
